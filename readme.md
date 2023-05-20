@@ -1,7 +1,7 @@
 # C++ STRUCT
 This project is created to learn some c++. 
 The goal is to use SDL to visualise some sorting algorithms as I did in p5.js.
-Link: [github.com/michalPrzyl/p5]
+Link: [https://github.com/michalPrzyl/p5]
 
 # TODO
 - [ ] add passing arguments by pointer
