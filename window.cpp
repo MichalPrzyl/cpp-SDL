@@ -24,7 +24,7 @@ int main(){
 	SDL_Rect rectangle;
 
 	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
-	//
+	
 	// direction of moving
 	bool going_right = true;
 
@@ -36,7 +36,6 @@ int main(){
 
 		SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 		SDL_RenderClear(renderer);
-		//SDL_RenderPresent(renderer);
 		
 		// trying to draw a rectangle
 		//SDL_Rect rectangle ={100,100,30,30};
@@ -45,16 +44,15 @@ int main(){
 		 rectangle.y = 100;
 		 rectangle.w = square_width;
 		 rectangle.h = square_height;
-		// printf("x_position: %i\n", x_position);
-		// printf("rectangle_position: %i\n", rectangle.x);
 		
-		// adding position
+		// changing rectangle position
 		if (going_right){
 			x_position += change_in_position;
 		}
 		else{
 			x_position -= change_in_position;
 		}
+
 		// changing direction
 		if (x_position >= width-square_width)
 			going_right = false;
