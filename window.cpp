@@ -10,6 +10,7 @@ int main(){
 	int square_width = 30;
 	int square_height = 30;
 	int change_in_position = 5;
+	int change_in_y_position = 3;
 	int delay = 20;
 
 	window = SDL_CreateWindow("MP SDL", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, 0);
@@ -20,6 +21,7 @@ int main(){
 
 	int close = 0;
 	int x_position = start_position;
+	int y_position = start_position;
 	
 	SDL_Rect rectangle;
 
@@ -27,6 +29,7 @@ int main(){
 	
 	// direction of moving
 	bool going_right = true;
+	bool going_down = true;
 
 	// main loop
 	while (!close){
@@ -41,7 +44,7 @@ int main(){
 		//SDL_Rect rectangle ={100,100,30,30};
 
 		 rectangle.x = x_position;
-		 rectangle.y = 100;
+		 rectangle.y = y_position;
 		 rectangle.w = square_width;
 		 rectangle.h = square_height;
 		
@@ -52,12 +55,23 @@ int main(){
 		else{
 			x_position -= change_in_position;
 		}
+		if (going_down){
+			y_position += change_in_y_position;
+		}
+		else{
+			y_position -= change_in_y_position;
+		}
 
 		// changing direction
-		if (x_position >= width-square_width)
+		if (x_position >= width - square_width)
 			going_right = false;
 		if (x_position < 0)
 			going_right = true;
+		// down and up
+		if (y_position >= height - square_height)
+			going_down = false;
+		if (y_position < 0)
+			going_down = true;
 
 		SDL_Delay(delay);
 		SDL_SetRenderDrawColor(renderer, 0, 150, 100, 210);
