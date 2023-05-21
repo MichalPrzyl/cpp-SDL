@@ -6,11 +6,11 @@ Link: https://github.com/michalPrzyl/p5
 # TODO
 - [x] add passing arguments by reference
 - [ ] add passing arguments by pointer
-- [ ] implement SDL to project (SDL_image.h)
+- [x] implement SDL to project (SDL_image.h)
 - [x] create window
-- [ ] create simple shapes
+- [x] create simple shapes
 - [ ] implement time
-- [ ] implement animations
+- [x] implement animations
 - [ ] implement sorting algorithm
 
 
