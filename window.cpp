@@ -9,14 +9,8 @@ int generate_random_number(int min, int max){
 	return return_value;
 }
 
-// generating 3 element array of color rbg values
-int * get_new_color(){
-	int new_color[3] = {1,2,3};
-	return new int[3] {new_color[0], new_color[1], new_color[2]};
-}
-
 int main(){
-	printf("Hello world\n");
+	printf("Starting...\n");
 	SDL_Window *window = NULL;
 	int width = 400;
 	int height = 400;
@@ -25,7 +19,9 @@ int main(){
 	int change_in_position = 5;
 	int change_in_y_position = 3;
 	int delay = 20;
-	int color[3] = {255, 0, 255};
+	// colors
+	int square_color[3] = {255, 0, 255};
+	int background_color[3] = {138, 138, 138};
 	//int* color;
 
 	window = SDL_CreateWindow("MP SDL", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, 0);
@@ -53,8 +49,8 @@ int main(){
 
 		// renderer
 
-		//SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-		SDL_SetRenderDrawColor(renderer, 0, color[0], color[1], color[2]);
+		SDL_SetRenderDrawColor(renderer, 138, 138, 138, 0);
+		//SDL_SetRenderDrawColor(renderer, 0, color[0], color[1], color[2]);
 		SDL_RenderClear(renderer);
 		
 		// trying to draw a rectangle
@@ -93,20 +89,24 @@ int main(){
 		if (y_position < 0){
 			going_down = true;
 		}
+		// on every wall hit condition
 		if (x_position >= width - square_width ||
 				x_position < 0 ||
 				y_position >= height - square_height ||
 				y_position < 0){
-			color[0] = generate_random_number(0, 255);
-			color[1] = generate_random_number(0, 255);
-			color[2] = generate_random_number(0, 255);
+			// changing rectangle color
+			square_color[0] = generate_random_number(0, 255);
+			square_color[1] = generate_random_number(0, 255);
+			square_color[2] = generate_random_number(0, 255);
 		}
 
 		SDL_Delay(delay);
-		SDL_SetRenderDrawColor(renderer, 0, 150, 100, 210);
-		//SDL_SetRenderDrawColor(renderer, 0, color[0], color[1], color[2]);
 
-		SDL_RenderDrawRect(renderer, &rectangle);
+		// drawing rectangle
+		SDL_SetRenderDrawColor(renderer, square_color[0], square_color[1], square_color[2], 0);
+
+		//SDL_RenderDrawRect(renderer, &rectangle);
+		SDL_RenderFillRect(renderer, &rectangle);
 
 		SDL_RenderPresent(renderer);
 
@@ -115,7 +115,7 @@ int main(){
 			// events
 			switch (event.type){
 				case SDL_QUIT:
-				printf("SDL_QUIT received...\n");
+				printf("SDL_QUIT signal received...\n");
 				close = 1;
 				break;
 			}
