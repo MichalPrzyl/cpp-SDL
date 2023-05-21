@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mouse.h>
 #include <SDL2/SDL_render.h>
 #include <cstdlib>
 
@@ -21,7 +22,7 @@ int main(){
 	int delay = 20;
 	// colors
 	int square_color[3] = {255, 0, 255};
-	int background_color[3] = {138, 138, 138};
+	int background_color[3] = {0, 0, 0};
 	//int* color;
 
 	window = SDL_CreateWindow("MP SDL", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, 0);
@@ -34,7 +35,15 @@ int main(){
 	int x_position = start_position;
 	int y_position = start_position;
 	
+	// mouse position	
+	int x,y;
+
 	SDL_Rect rectangle;
+	SDL_Rect background_rectangle;
+		background_rectangle.x = 0;
+		background_rectangle.y = 0;
+		background_rectangle.w = width;
+		background_rectangle.h = height;
 
 	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
 	
@@ -48,19 +57,45 @@ int main(){
 		
 
 		// renderer
-
-		SDL_SetRenderDrawColor(renderer, 138, 138, 138, 0);
-		//SDL_SetRenderDrawColor(renderer, 0, color[0], color[1], color[2]);
 		SDL_RenderClear(renderer);
-		
-		// trying to draw a rectangle
-		//SDL_Rect rectangle ={100,100,30,30};
 
+		// background
+		SDL_SetRenderDrawColor(renderer, background_color[0], background_color[1], background_color[2], 0);
+		SDL_RenderFillRect(renderer, &background_rectangle);
+		
+		// rectangle
 		 rectangle.x = x_position;
 		 rectangle.y = y_position;
 		 rectangle.w = square_width;
 		 rectangle.h = square_height;
 		
+		// drawing rectangle
+		SDL_SetRenderDrawColor(renderer, square_color[0], square_color[1], square_color[2], 0);
+
+		//SDL_RenderDrawRect(renderer, &rectangle);
+		SDL_RenderFillRect(renderer, &rectangle);
+
+
+		// getting mouse position
+		Uint32 buttons;
+		SDL_PumpEvents();
+		buttons = SDL_GetMouseState(&x, &y);
+		//printf("x: %d, y: %d\n", x, y);
+		
+
+		// drawing lines
+		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+		// SDL_RenderDrawLine(renderer, x, y, x_position + (square_width/2), y_position + (square_height/2));
+		SDL_RenderDrawLine(renderer, 0, 0, x_position + (square_width/2), y_position + (square_height/2));
+		SDL_RenderDrawLine(renderer, width, height, x_position + (square_width/2), y_position + (square_height/2));
+		SDL_RenderDrawLine(renderer, 0, width, x_position + (square_width/2), y_position + (square_height/2));
+		SDL_RenderDrawLine(renderer, height, 0, x_position + (square_width/2), y_position + (square_height/2));
+
+		SDL_RenderPresent(renderer);
+
+
+
+
 		// changing rectangle position
 		if (going_right){
 			x_position += change_in_position;
@@ -100,26 +135,24 @@ int main(){
 			square_color[2] = generate_random_number(0, 255);
 		}
 
+
+	
 		SDL_Delay(delay);
-
-		// drawing rectangle
-		SDL_SetRenderDrawColor(renderer, square_color[0], square_color[1], square_color[2], 0);
-
-		//SDL_RenderDrawRect(renderer, &rectangle);
-		SDL_RenderFillRect(renderer, &rectangle);
-
-		SDL_RenderPresent(renderer);
-
 		while (SDL_PollEvent(&event)){
 			
 			// events
 			switch (event.type){
 				case SDL_QUIT:
-				printf("SDL_QUIT signal received...\n");
-				close = 1;
-				break;
+					printf("SDL_QUIT signal received...\n");
+					close = 1;
+					break;
+				
+				// mouse clicking
+				case SDL_MOUSEBUTTONDOWN:
+					printf("Mouse was clicked!\n");
 			}
 		}
 		}
+
 	return 0;
 }
