@@ -13,6 +13,7 @@ int generate_random_number(int min, int max){
 int main(){
 	printf("Starting...\n");
 	SDL_Window *window = NULL;
+
 	int width = 400;
 	int height = 400;
 	int square_width = 30;
@@ -26,9 +27,7 @@ int main(){
 	//int* color;
 
 	window = SDL_CreateWindow("MP SDL", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, 0);
-	//SDL_Delay(3000);
-	//SDL_DestroyWindow(window);
-	//SDL_Quit();
+
 	int start_position = 30;
 
 	int close = 0;
@@ -55,7 +54,6 @@ int main(){
 	while (!close){
 		SDL_Event event;
 		
-
 		// renderer
 		SDL_RenderClear(renderer);
 
@@ -69,7 +67,6 @@ int main(){
 		// if you want to the rectangle following your mouse uncoment those 2 lines	
 		// rectangle.x = x - (square_width/2);
 		// rectangle.y = y - (square_height/2);
-
 
 		 rectangle.w = square_width;
 		 rectangle.h = square_height;
@@ -92,8 +89,6 @@ int main(){
 		SDL_RenderDrawLine(renderer, height, 0, x_position + (square_width/2), y_position + (square_height/2));
 
 		SDL_RenderPresent(renderer);
-
-
 
 
 		// changing rectangle position
@@ -126,13 +121,13 @@ int main(){
 		}
 		// on every wall hit condition
 		if (x_position >= width - square_width ||
-				x_position < 0 ||
-				y_position >= height - square_height ||
-				y_position < 0){
+			x_position < 0 ||
+			y_position >= height - square_height ||
+			y_position < 0){
 			// changing rectangle color
-			square_color[0] = generate_random_number(0, 255);
-			square_color[1] = generate_random_number(0, 255);
-			square_color[2] = generate_random_number(0, 255);
+				square_color[0] = generate_random_number(0, 255);
+				square_color[1] = generate_random_number(0, 255);
+				square_color[2] = generate_random_number(0, 255);
 		}
 
 
@@ -152,7 +147,7 @@ int main(){
 					printf("Mouse was clicked!\n");
 			}
 		}
-		}
+	}
 
 	return 0;
 }
