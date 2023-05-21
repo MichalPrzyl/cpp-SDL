@@ -64,15 +64,18 @@ int main(){
 		SDL_RenderFillRect(renderer, &background_rectangle);
 		
 		// rectangle
-		 rectangle.x = x_position;
-		 rectangle.y = y_position;
+		rectangle.x = x_position;
+		rectangle.y = y_position;
+		// if you want to the rectangle following your mouse uncoment those 2 lines	
+		// rectangle.x = x - (square_width/2);
+		// rectangle.y = y - (square_height/2);
+
+
 		 rectangle.w = square_width;
 		 rectangle.h = square_height;
 		
 		// drawing rectangle
 		SDL_SetRenderDrawColor(renderer, square_color[0], square_color[1], square_color[2], 0);
-
-		//SDL_RenderDrawRect(renderer, &rectangle);
 		SDL_RenderFillRect(renderer, &rectangle);
 
 
@@ -80,12 +83,9 @@ int main(){
 		Uint32 buttons;
 		SDL_PumpEvents();
 		buttons = SDL_GetMouseState(&x, &y);
-		//printf("x: %d, y: %d\n", x, y);
-		
 
 		// drawing lines
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
-		// SDL_RenderDrawLine(renderer, x, y, x_position + (square_width/2), y_position + (square_height/2));
 		SDL_RenderDrawLine(renderer, 0, 0, x_position + (square_width/2), y_position + (square_height/2));
 		SDL_RenderDrawLine(renderer, width, height, x_position + (square_width/2), y_position + (square_height/2));
 		SDL_RenderDrawLine(renderer, 0, width, x_position + (square_width/2), y_position + (square_height/2));
