@@ -7,7 +7,7 @@ Link: https://github.com/michalPrzyl/p5
 - [x] add passing arguments by reference
 - [ ] add passing arguments by pointer
 - [ ] implement SDL to project (SDL_image.h)
-- [ ] create window
+- [x] create window
 - [ ] create simple shapes
 - [ ] implement time
 - [ ] implement animations
